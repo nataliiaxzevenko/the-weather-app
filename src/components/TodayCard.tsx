@@ -1,9 +1,10 @@
 import React from 'react';
 var moment = require('moment');
 
-const DayCard = (props: any) => {
+const TodayCard = (props: any) => {
     let newDate = new Date();
     const weekday = props.reading.dt * 1000;
+    console.log('[today week day]', weekday);
     newDate.setTime(weekday);
 
     const fahrenheit = Math.round(props.reading.main.temp);
@@ -11,7 +12,7 @@ const DayCard = (props: any) => {
 
     let imgURL: string = "owf owf-" + props.reading.weather[0].id + " owf-5x";
 return (
-    <div className="col-sm-2">
+    <div className="col-sm-10 margine-bottom">
       <div className="card">
         <h3 className="card-title">{moment(newDate).format('dddd')}</h3>
         <p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
@@ -25,4 +26,4 @@ return (
 )
 }
 
-export default DayCard;
+export default TodayCard;
