@@ -6,10 +6,10 @@ const DayCard = (props: any) => {
     const weekday = props.reading.dt * 1000;
     newDate.setTime(weekday);
 
-    const fahrenheit = Math.round(props.reading.main.temp);
+    const fahrenheit = Math.round(props.reading.temp.day);
     const celsius = Math.round((fahrenheit - 32) * 5/9); 
 
-    let imgURL: string = "owf owf-" + props.reading.weather[0].id + " owf-5x";
+    let imgURL: string = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margine-bottom";
 return (
     <div className="col-sm-2">
       <div className="card">

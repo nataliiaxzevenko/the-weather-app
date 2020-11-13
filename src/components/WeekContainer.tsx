@@ -18,23 +18,17 @@ class WeekContainer extends React.Component{
         })
     }
     componentDidMount = () => {
-        const weatherURL = "http://api.openweathermap.org/data/2.5/forecast?zip=98134,us&units=imperial&APPID=" + apiConfig.forecastKey;
+        const weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=47.6062&lon=122.3321&exclude=alerts,minutely&units=imperial&appid=" + apiConfig.forecastKey;
         fetch(weatherURL)
         .then(res => res.json())
         .then(data => {
-            const dailyData = data.list.filter((r: any) => r.dt_txt.includes("18:00:00"));
+            const dailyData = data.daily.slice(1, 6); 
+            const todayData = data.current;
             this.setState({
-                fullData: data.list,
-                dailyData: dailyData
+                fullData: data,
+                dailyData: dailyData,
+                todayData: todayData
             }, () => console.log(this.state));
-        });
-
-        fetch('http://api.openweathermap.org/data/2.5/weather?zip=98134,us&units=imperial&APPID=' + apiConfig.forecastKey)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                todayData: data
-            })
         });
     }
 

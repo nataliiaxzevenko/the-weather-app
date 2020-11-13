@@ -15,3 +15,9 @@ code {
 .margine-bottom{
   margin-bottom: 20px;
 }
+
+.sun-icons .col{
+  text-align: start;
+  max-width: 140px;
+  margin-top: 20px;
+}
