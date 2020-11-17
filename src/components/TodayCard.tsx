@@ -9,13 +9,10 @@ const TodayCard = (props: any) => {
     const fahrenheit = Math.round(props.reading.temp);
     const celsius = Math.round((fahrenheit - 32) * 5/9); 
 
-    let sunrise = new Date();
-    const sunriseTime = props.reading.sunrise * 1000;
-    sunrise.setTime(sunriseTime);
+    let sunrise = new Date(props.reading.sunrise * 1000);
+    console.log(moment(sunrise).format('MMMM Do, h:mm a'));
 
-    let sunset = new Date();
-    const sunsetTime = props.reading.sunset * 1000;
-    sunset.setTime(sunsetTime);
+    let sunset = new Date(props.reading.sunset * 1000);
 
     const weatherImg = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margine-bottom";
 
@@ -34,11 +31,9 @@ return (
             </div>
             <div className="col">
                 <div className="row">
-                    {/* <i className="wi wi-strong-wind"></i> */}
                     <h5>Wind:  {props.reading.wind_speed} miles/hour</h5>
                 </div>
                 <div className="row">
-                    {/* <i className="wi wi-humidity"></i> */}
                     <h5>Humidity:  {props.reading.humidity} %</h5>
                 </div>
                 <div className="row sun-icons" style={{alignItems: 'start'}}>
