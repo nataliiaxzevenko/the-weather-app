@@ -90,3 +90,28 @@ code {
 .geosuggest__item__matched-text {
   font-weight: bold;
 }
+
+.alert-card{
+  border: 3px solid rgb(175, 9, 9);
+  background-color: rgb(255, 0, 0);
+  opacity: 90%;
+}
+
+.alert-card .card-title{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.alert-card .card-header{
+  font-size: 20px;
+}
+
+.alert-card p{
+  font-size: 16px;
+  margin: 5px;
+}
+
+.alert-card a{
+  cursor: pointer;
+  text-decoration: none;
+}

@@ -10,8 +10,6 @@ const TodayCard = (props: any) => {
     const celsius = Math.round((fahrenheit - 32) * 5/9); 
 
     let sunrise = new Date(props.reading.sunrise * 1000);
-    console.log(moment(sunrise).format('MMMM Do, h:mm a'));
-
     let sunset = new Date(props.reading.sunset * 1000);
 
     const weatherImg = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margine-bottom";
