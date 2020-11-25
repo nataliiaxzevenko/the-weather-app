@@ -11,7 +11,7 @@ const AlertBaner = (props: any) => {
     }
 
 return (
-    <div className="col-sm-10 margine-bottom">
+    <div className="col-sm-10 margin-bottom">
       <div className="card alert-card">
       <h3 className="card-header">Alert!</h3>
         <h5 className="card-title">{props.reading.event}</h5>

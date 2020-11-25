@@ -12,10 +12,10 @@ const TodayCard = (props: any) => {
     let sunrise = new Date(props.reading.sunrise * 1000);
     let sunset = new Date(props.reading.sunset * 1000);
 
-    const weatherImg = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margine-bottom";
+    const weatherImg = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margin-bottom";
 
 return (
-    <div className="col-sm-10 margine-bottom">
+    <div className="col-sm-10 margin-bottom">
       <div className="card">
         <h3 className="card-header">{moment(newDate).format('dddd')}</h3>
         <p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>

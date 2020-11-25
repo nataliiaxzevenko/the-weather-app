@@ -9,7 +9,7 @@ const DayCard = (props: any) => {
     const fahrenheit = Math.round(props.reading.temp.day);
     const celsius = Math.round((fahrenheit - 32) * 5/9); 
 
-    let imgURL: string = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margine-bottom";
+    let imgURL: string = "wi wi-owm-"+props.reading.weather[0].id+" owf-4x margin-bottom";
 return (
     <div className="col-sm-2">
       <div className="card">

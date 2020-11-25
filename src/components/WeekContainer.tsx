@@ -2,8 +2,9 @@ import React from 'react';
 import DayCard from './DayCard';
 import DegreeToggle from './DegreeToggle';
 import TodayCard from './TodayCard';
-import Geosuggest from 'react-geosuggest';
 import Alert from './AlertBaner';
+import _Header from './_Header';
+import SearchBar from './SearchBar';
 
 type WeekContainerState = {
     fullData: any[],
@@ -16,7 +17,6 @@ type WeekContainerState = {
 }
 
 class WeekContainer extends React.Component<{}, WeekContainerState>{
-    geosuggestEl: React.RefObject<Geosuggest>;
     constructor(props: any){
         super(props);
         this.state = {
@@ -28,7 +28,6 @@ class WeekContainer extends React.Component<{}, WeekContainerState>{
             initialCity: "Seattle, WA, USA",
             alertData: null
         }
-        this.geosuggestEl = React.createRef();
     }
 
     updateDegree = (e: any) =>{
@@ -70,6 +69,15 @@ class WeekContainer extends React.Component<{}, WeekContainerState>{
         this.onLoadData();
     }
 
+    onSuggestSelect = (suggest: any) => {
+        const city = suggest && suggest.gmaps ? suggest.gmaps.formatted_address.replace(/\d+$/, "") : "";
+        this.setState({
+            searchTerm: suggest,
+            initialCity: city
+        }, () => console.log(this.state));
+        this.onLoadData();
+    }
+
     dayCards = () => {
         return this.state.dailyData.map((r, index) => 
         <DayCard 
@@ -88,45 +96,21 @@ class WeekContainer extends React.Component<{}, WeekContainerState>{
                 return <h2>Loading...</h2>;
         }
     }
-    onSuggestSelect = (suggest: any) => {
-        const city = suggest && suggest.gmaps ? suggest.gmaps.formatted_address.replace(/\d+$/, "") : "";
-        this.setState({
-            searchTerm: suggest,
-            initialCity: city
-        }, () => console.log(this.state))
-        this.onLoadData();
-    }
 
     render(){
-        const fixtures = [
-            {label: 'Seattle, WA, USA'},
-            {label: 'Kiev, Ukraine'},
-            {label: 'New York, NY, USA'}
-        ];
-
         return (
-            <div className="container">
-                <h1 className="display-4 jumbotron">The Weather Forecast</h1>
-                <Geosuggest
-                ref={this.geosuggestEl}
-                placeholder="Search new city..."
-                initialValue={this.state.initialCity}
-                fixtures={fixtures}
-                onSuggestSelect={this.onSuggestSelect}
-                location={new google.maps.LatLng(47.6062, 122.3321)}
-                radius={20} />
-                {this.state.alertData !== null ?
-                <div className="row justify-content-center">
-                    <Alert reading={this.state.alertData} />
-                </div> : null
-                }
-        <h5 className="display-5 text-muted">{this.state.initialCity}</h5>
-                <DegreeToggle degreeType={this.state.degreeType} updateDegree={(event: any) => this.updateDegree(event)}/>
-                <div className="row justify-content-center">
-                    {this.todayCard()}
-                </div>
-                <div className="row justify-content-center">
-                    {this.dayCards()}
+            <div>
+                <_Header />
+                <div className="container">
+                    <SearchBar initialCity={this.state.initialCity} onSuggestSelect={this.onSuggestSelect} />
+                    <h5 className="display-5 text-muted">{this.state.initialCity}</h5>
+                    <DegreeToggle degreeType={this.state.degreeType} updateDegree={(event: any) => this.updateDegree(event)}/>
+                    <div className="row justify-content-center">
+                        {this.todayCard()}
+                    </div>
+                    <div className="row justify-content-center">
+                        {this.dayCards()}
+                    </div>
                 </div>
             </div>
         )
